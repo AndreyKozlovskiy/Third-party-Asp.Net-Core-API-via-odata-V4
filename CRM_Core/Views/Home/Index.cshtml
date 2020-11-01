@@ -1,0 +1,43 @@
+﻿@model List<CRM_Core.Models.ContactViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Contacts</h1>
+
+<div class="form-group">
+    <a href="@Url.Action("AddContact", "Home")" class="btn btn-success">Add Contact</a>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var contact in Model)
+        {
+            <li style="margin-top:15px; list-style-type:none">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <a href="@Url.Action("Contact", "Home", new { id = contact.Id})" class="alert-link">@contact.Name</a>
+                        </div>
+                        <div class="col-sm">
+                            <span>@contact.MobilePhone</span>
+                        </div>
+
+                        <div class="col-sm">
+                            <form method="post" action="">
+                                <input type="hidden" name="id" value="@contact.Id" />
+                                <input type="submit" value="delete" class="btn btn-danger" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
